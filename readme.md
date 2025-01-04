@@ -72,6 +72,7 @@ Para utilizar el proyecto, puedes abrir el archivo HTML en tu navegador y person
 - RepublicaDominicana: `America/Santo_Domingo`
 - Uruguay: `America/Montevideo`
 - Venezuela: `America/Caracas`
+- España: `Europe/Madrid`
 
 ## Requisitos
 
