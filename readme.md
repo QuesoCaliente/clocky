@@ -25,9 +25,9 @@ Para utilizar el proyecto, puedes abrir el archivo HTML en tu navegador y person
    ```
    https://trinilup.github.io/clocky/?pais=Mexico&text=🌮
 
-   Resultado: Muestra la hora de la Ciudad de México con un emoji de taco.
-
    ```
+
+   Resultado: Muestra la hora de la Ciudad de México con un emoji de taco.
 
 2. Hora en Chile con emoji predeterminado:
 
