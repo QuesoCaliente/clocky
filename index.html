@@ -47,19 +47,54 @@
 <body>
     <div class="container">
         <span id="reloj"></span>
-        <p>🐭</p>
+        <p id="text">🐭</p>
     </div>
     <script>
-        function actualizarReloj() {
+            
+        function obtenerZonaHoraria(pais) {
+            const zonasHorarias = {
+                "Argentina": "America/Argentina/Buenos_Aires",
+                "Bolivia": "America/La_Paz",
+                "Brasil": "America/Sao_Paulo",
+                "Chile": "America/Santiago",
+                "Colombia": "America/Bogota",
+                "CostaRica": "America/Costa_Rica",
+                "Cuba": "America/Havana",
+                "Ecuador": "America/Guayaquil",
+                "ElSalvador": "America/El_Salvador",
+                "Guatemala": "America/Guatemala",
+                "Honduras": "America/Tegucigalpa",
+                "Mexico": "America/Mexico_City",
+                "Nicaragua": "America/Managua",
+                "Panama": "America/Panama",
+                "Paraguay": "America/Asuncion",
+                "Peru": "America/Lima",
+                "RepublicaDominicana": "America/Santo_Domingo",
+                "Uruguay": "America/Montevideo",
+                "Venezuela": "America/Caracas",
+            };
+            return zonasHorarias[pais] || null; // Devuelve null si el país no está en la lista
+        }
+        function actualizarReloj(zonaHoraria) {
             const ahora = new Date();
-            const horas = String(ahora.getHours()).padStart(2, '0');
-            const minutos = String(ahora.getMinutes()).padStart(2, '0');
-            const segundos = String(ahora.getSeconds()).padStart(2, '0');
-            document.getElementById('reloj').textContent = `${horas}:${minutos}:${segundos}`;
+            const opciones = { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" };
+            if (zonaHoraria) opciones.timeZone = zonaHoraria; // Usar zona horaria si está disponible
+            const horaFormateada = new Intl.DateTimeFormat("en-US", opciones).format(ahora);
+            document.getElementById('reloj').textContent = horaFormateada;
         }
 
-        setInterval(actualizarReloj, 1000);
-        actualizarReloj();
+        // Obtener parámetros de la URL
+        const params = new URLSearchParams(window.location.search);
+        const pais = params.get("pais");
+        const zonaHoraria = obtenerZonaHoraria(pais);
+
+        // Cambiar el emoji
+        const text = document.getElementById("text");
+        text.textContent = params.get("text") || "🐭";
+
+        // Actualizar el reloj cada segundo
+        setInterval(() => actualizarReloj(zonaHoraria), 1000);
+        actualizarReloj(zonaHoraria);
     </script>
 </body>
 </html>
